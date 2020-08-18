@@ -1,0 +1,7 @@
+version: '3.5'
+services:
+    slack:
+        image: midmich/slack_helper:latest
+        environment:
+            SLACK_WEBHOOK_URL:      ""
+            SLACK_TEXT:             "foo bar baz"
