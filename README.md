@@ -6,11 +6,11 @@ A Docker image to streamline sending a message to Slack
 ### Docker CLI
 
 ```
-docker run --rm midmich/webhook_images/slack:latest "Message to send to Slack"
+docker run --rm midmich/slack_helper:latest "Message to send to Slack"
 ```
 
 ```
-docker run --rm --env SLACK_TEXT="A different way to indicate which message to Slack" midmich/webhook_images/slack:latest
+docker run --rm --env SLACK_TEXT="A different way to indicate which message to Slack" midmich/slack_helper:latest
 ```
 
 ### Docker Compose
@@ -21,7 +21,7 @@ A minimum viable `docker-compose.yml`
 version: '3.2'
 services:
     slack:
-        image: midmich/webhook_images/slack:latest
+        image: midmich/slack_helper:latest
         environment:
             SLACK_WEBHOOK_URL: https://hooks.slack.com/services/your/webhook/path
             SLACK_TEXT: "foo bar baz"
@@ -33,7 +33,7 @@ If you provide both `SLACK_TEXT` and a message parameter, only the `SLACK_TEXT` 
 
 For example, this command will send "message foo" to Slack:
 ```
-docker run --rm --env SLACK_TEXT="message foo" midmich/webhook_images/slack:latest "message bar"
+docker run --rm --env SLACK_TEXT="message foo" midmich/slack_helper:latest "message bar"
 ```
 
 ## Run-Time Configuration
