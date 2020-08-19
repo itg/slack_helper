@@ -1,6 +1,13 @@
 FROM    bash:latest
 LABEL   maintainer="Mid Michigan College Programming Team <programming@midmich.edu>" \
-        description="An image for easily putting a message to Slack via a webhook"
+        "org.opencontainers.image.authors"="Mid Michigan College Programming Team <programming@midmich.edu>" \
+        "org.opencontainers.image.description"="A Docker image to streamline sending a message to Slack" \
+        "org.opencontainers.image.documentation"="https://github.com/itg/slack_helper/blob/master/README.md" \
+        "org.opencontainers.image.licenses"="MIT" \
+        "org.opencontainers.image.source"="https://github.com/itg/slack_helper/" \
+        "org.opencontainers.image.title"="slack_helper" \
+        "org.opencontainers.image.url"="https://hub.docker.com/r/midmich/slack_helper" \
+        "org.opencontainers.image.version"="1.0.0"
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD [""]
