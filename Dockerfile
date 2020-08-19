@@ -2,7 +2,7 @@ FROM    bash:latest
 LABEL   maintainer="Mid Michigan College Programming Team <programming@midmich.edu>" \
         description="An image for easily putting a message to Slack via a webhook"
 
-ENTRYPOINT ["/source/ping.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD [""]
 
 # Supply default Environment variables available to, and can be overridden in,
@@ -20,6 +20,7 @@ RUN 	apk add --update --no-cache \
         && echo "America/Detroit" > /etc/timezone
 
 COPY    source/     /source
+RUN     ln -sf /source/ping.sh  /entrypoint.sh
 
 # Make it easy to find the time the container was built by putting it everywhere
 ARG     BUILD_TIME
