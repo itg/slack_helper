@@ -23,11 +23,14 @@ then
     exit 0
 fi
 
+curl_options=()
+curl_options+=( "$SLACK_WEBHOOK_URL" )
+curl_options+=( --header "Content-type: application/json" )
+
 # `trace-ascii -` looks a bit like a typo, but it means to write the trace to STDOUT
-curl \
-    --trace-ascii - \
-    --header "Content-type: application/json" \
-   "$SLACK_WEBHOOK_URL" \
+curl_options+=( --trace-ascii - )
+
+curl "${curl_options[@]}" \
     --data-binary @- << EOF
     {
         "text":         "${SLACK_TEXT//\"/\\\"}",
