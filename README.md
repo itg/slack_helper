@@ -27,7 +27,7 @@ services:
             SLACK_TEXT: "foo bar baz"
 ```
 
-## Usage Note: Mutliple In, Single Out
+## Usage Note: Multiple In, Single Out
 
 If you provide both `SLACK_TEXT` and a message parameter, only the `SLACK_TEXT` value is used
 
