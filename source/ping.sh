@@ -1,6 +1,14 @@
 #!/bin/bash
 
-echo "SLACK_TEXT is -$SLACK_TEXT-"
+#debug verbosity
+readonly LOG_LEVEL_NONE=0
+readonly LOG_LEVEL_INFO=1
+readonly LOG_LEVEL_WARN=5
+readonly LOG_LEVEL_DEBUG=10
+readonly LOG_LEVEL_TRACE=100
+
+
+[[ -n "$DEBUG_LEVEL" && "$DEBUG_LEVEL" -ge "$LOG_LEVEL_INFO" ]] && echo -e "SLACK_TEXT from ENV is\r\n\t$SLACK_TEXT"
 
 if [[ -z "$SLACK_TEXT" ]]
 then
@@ -8,7 +16,7 @@ then
     SLACK_TEXT="$1"
 fi
 
-echo "SLACK_TEXT is -$SLACK_TEXT-"
+[[ -n "$DEBUG_LEVEL" && "$DEBUG_LEVEL" -ge "$LOG_LEVEL_INFO" ]] && echo -e "SLACK_TEXT to send is\r\n\t$SLACK_TEXT"
 
 if [[ "$CI_PROJECT_PATH" ]]
 then
@@ -28,7 +36,7 @@ curl_options+=( "$SLACK_WEBHOOK_URL" )
 curl_options+=( --header "Content-type: application/json" )
 
 # `trace-ascii -` looks a bit like a typo, but it means to write the trace to STDOUT
-curl_options+=( --trace-ascii - )
+[[ -n "$DEBUG_LEVEL" && "$DEBUG_LEVEL" -ge "$LOG_LEVEL_TRACE" ]] && curl_options+=( --trace-ascii - )
 
 curl "${curl_options[@]}" \
     --data-binary @- << EOF
